@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 10 · C10 Decision Practice</title>
+<style>
+:root{--bg:#f4f6fb;--panel:#fff;--ink:#172033;--muted:#667085;--line:#e4e8f0;--blue:#3457d5;--blue2:#edf1ff;--green:#16794b;--red:#b54747;--gold:#946200;--shadow:0 8px 28px #18264a0d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+header{background:#111b36;color:white;padding:28px max(20px,calc((100% - 1180px)/2)) 25px}
+header .eyebrow{color:#b8c5ff;font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+h1{font-size:clamp(27px,4vw,38px);line-height:1.1;margin:8px 0}
+header p{color:#d4dbef;margin:8px 0 0;max-width:700px}
+main{max-width:1180px;margin:24px auto;padding:0 18px 60px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+select,input,button{font:inherit}button,select,input{border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:#fff;color:var(--ink)}
+button{cursor:pointer;font-weight:650}button:hover{border-color:#9eafea;background:#f8f9ff}
+button.primary{background:var(--blue);color:#fff;border-color:var(--blue)}button.primary:hover{background:#2848bd}
+button.danger{color:var(--red)}button.small{padding:5px 8px;font-size:12px}
+select{max-width:100%}.spacer{flex:1}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:20px;margin:16px 0;box-shadow:var(--shadow)}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:14px}
+h2{font-size:19px;margin:0 0 4px}h3{font-size:15px;margin:0 0 8px}
+.sub{color:var(--muted);font-size:13px;margin:0}
+.pill{display:inline-flex;background:var(--blue2);color:#3149a5;border-radius:30px;padding:4px 9px;font-size:11px;font-weight:800;letter-spacing:.03em}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:610px;font-size:13px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:center;white-space:nowrap}
+th{background:#f7f8fc;color:#49536a;font-weight:750}
+th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:#fbfcff;z-index:1}
+td input{width:88px;text-align:center;padding:7px}
+td .name-input{width:145px;text-align:left}
+tfoot td{font-weight:750;background:#f8f9fc}
+.inline-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.unit{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+.unit input{width:120px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.metric{padding:14px;border:1px solid var(--line);border-radius:11px;background:#fcfcfe}
+.metric .k{font-size:12px;color:var(--muted);font-weight:700}
+.metric .v{font-size:22px;font-weight:800;margin:3px 0}
+.metric .who{font-size:12px;color:var(--green);font-weight:700}
+.winner{background:#f0faf5;border-color:#b9e4cc}
+.results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.result{border:1px solid var(--line);border-radius:11px;padding:14px}
+.result .big{font-size:19px;font-weight:800;margin:4px 0}
+.muted{color:var(--muted)}.note{font-size:12px;color:var(--muted);margin-top:10px}
+.warning{background:#fff7e6;border:1px solid #f0d89c;color:#805700;padding:10px 12px;border-radius:9px;margin:12px 0;font-size:13px}
+.good{background:#effaf4;border:1px solid #bce5cd;color:#17613e;padding:10px 12px;border-radius:9px;margin:12px 0;font-size:13px}
+.stage-list{display:grid;gap:12px}
+.stage{border:1px solid var(--line);border-radius:11px;padding:13px}
+.stage-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.stage-top label{font-weight:750}
+.stage select{min-width:190px}
+.stage-stats{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.tag{border-radius:20px;padding:4px 8px;font-size:11px;font-weight:750}
+.tag.keep{background:#eaf7ef;color:#17613e}.tag.out{background:#fff0f0;color:#a33d3d}
+.flow{display:flex;gap:10px;overflow-x:auto;padding:8px 2px 14px;align-items:stretch}
+.flow-col{min-width:190px;max-width:240px;flex:1;border:1px solid var(--line);border-radius:11px;padding:11px;background:#fbfcff}
+.flow-col h4{margin:0 0 9px;font-size:12px;color:#4a5670}
+.flow-node{padding:7px 8px;background:#eaf7ef;border:1px solid #c7e8d3;border-radius:7px;margin:5px 0;font-size:12px}
+.flow-node.eliminated{background:#fff1f1;border-color:#f0cccc;color:#994848;text-decoration:line-through}
+.flow-arrow{align-self:center;color:#8993a9;font-size:22px;font-weight:800}
+.ai-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.ai-row input{flex:1;min-width:240px}
+a{color:var(--blue);font-weight:700}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:22px}
+@media(max-width:760px){main{padding:0 12px 40px}.card{padding:15px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.results{grid-template-columns:1fr}.section-head{flex-direction:column}.flow-col{min-width:170px}}
+@media print{body{background:white}.toolbar,.inline-actions,.stage button,header .no-print{display:none!important}.card{box-shadow:none;break-inside:avoid}main{max-width:none}}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">Grade 10 · Term 1</div><h1>C10 Decision Practice</h1><p>Explore decisions under uncertainty. Edit alternatives, states, payoffs and probabilities, then compare decision criteria and staged filtering.</p></header>
+<main>
+<div class="toolbar">
+<label class="unit">Preloaded example
+<select id="example">
+<option value="logistics">City logistics</option><option value="energy">Energy investment</option><option value="custom">Blank / custom</option>
+</select></label>
+<button id="reset" class="primary">Load example</button><span class="spacer"></span>
+<button id="print">Print dashboard</button>
+</div>
+<section class="card">
+<div class="section-head"><div><span class="pill">01 · INPUTS</span><h2 style="margin-top:7px">Payoff table</h2><p class="sub">Enter payoffs for each alternative under every state of nature. Higher values are better.</p></div>
+<label class="unit">Payoff unit <input id="unit" value="$ thousands" aria-label="Payoff unit"></label></div>
+<div id="inputNotice"></div><div class="table-wrap"><table id="payoffTable"></table></div>
+<div class="inline-actions"><button id="addAlt">＋ Add alternative</button><button id="addState">＋ Add state</button><button id="transpose">Transpose table</button></div>
+<p class="note">Probabilities are percentages. Their total must equal 100% for EMV/Bayes calculations. Payoffs may be positive or negative.</p>
+</section>
+<section class="card">
+<div class="section-head"><div><span class="pill">02 · SUMMARY</span><h2 style="margin-top:7px">Alternative statistics</h2><p class="sub">Statistics are calculated from the complete original table.</p></div></div>
+<div id="summary"></div><div id="regretArea"></div>
+</section>
+<section class="card">
+<div class="section-head"><div><span class="pill">03 · DECISION CRITERIA</span><h2 style="margin-top:7px">Compare the four criteria</h2><p class="sub">Each criterion independently evaluates every original alternative.</p></div></div>
+<div id="criteria" class="results"></div>
+</section>
+<section class="card">
+<div class="section-head"><div><span class="pill">04 · STAGED FILTERING</span><h2 style="margin-top:7px">Filter alternatives step by step</h2><p class="sub">Each stage keeps the best score among the alternatives that survived the previous stage. All ties at the cutoff survive.</p></div></div>
+<div id="stages" class="stage-list"></div>
+<div class="inline-actions"><button id="addStage">＋ Add filtering stage</button><button id="resetStages">Reset stages</button></div>
+<div id="flowWrap" style="margin-top:18px"><h3>Filtering flow diagram</h3><div id="flow" class="flow"></div><p class="note">Green nodes survive each stage. Red crossed-out nodes are eliminated at that stage. Arrows show the survivor path.</p></div>
+</section>
+<section class="card">
+<div class="section-head"><div><span class="pill">05 · AI DEVELOPMENT RECORD</span><h2 style="margin-top:7px">AI conversation link</h2></div></div>
+<p class="sub" style="margin-bottom:12px">Paste the share link for the AI conversation used to develop this webpage. The link below updates automatically.</p>
+<div class="ai-row"><input id="aiUrl" type="url" placeholder="https://chatgpt.com/share/…" aria-label="AI conversation share URL"><a id="aiLink" href="https://chatgpt.com/" target="_blank" rel="noopener">Open AI development conversation ↗</a></div>
+<p class="note" id="aiStatus">Add your actual conversation share URL before submitting.</p>
+</section>
+<footer>Grade 10 · Term 1 · C10 Practice Dashboard</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const clone=x=>JSON.parse(JSON.stringify(x));
+const examples={
+logistics:{unit:"$ thousands",alts:["Expand delivery fleet","Outsource deliveries","Build local hub","Keep current system"],states:[["High demand",.25],["Medium demand",.50],["Low demand",.25]],pay:[[180,110,20],[130,100,65],[210,90,-40],[70,70,70]]},
+energy:{unit:"$ millions",alts:["Solar farm","Wind farm","Natural gas plant","Efficiency program"],states:[["High energy prices",.30],["Stable prices",.45],["Low energy prices",.25]],pay:[[160,105,35],[145,125,80],[190,90,-35],[95,90,85]]},
+custom:{unit:"units",alts:["Alternative A","Alternative B","Alternative C"],states:[["State 1",.5],["State 2",.5]],pay:[[80,20],[55,55],[20,90]]}
+};
+let data,stages,transposed=false,showRegret=false;
+const TOL=1e-9;
+const fmt=n=>Number.isFinite(n)?(Math.abs(n)<1e-10?"0.00":n.toFixed(2)):"—";
+const tied=(a,b)=>Math.abs(a-b)<=TOL;
+function load(key){const e=clone(examples[key]||examples.custom);data={unit:e.unit,alts:e.alts,states:e.states.map(s=>({name:s[0],p:s[1]*100})),pay:e.pay};transposed=false;stages=[{criterion:"maximin",label:"Stage 1 · Maximin"},{criterion:"emv",label:"Stage 2 · EMV / Bayes"},{criterion:"minimaxRegret",label:"Stage 3 · Minimax regret"}];render()}
+function valid(){let errors=[];if(data.alts.length<1)errors.push("Add at least one alternative.");if(data.states.length<1)errors.push("Add at least one state of nature.");if(data.pay.some(r=>r.length!==data.states.length||r.some(v=>!Number.isFinite(v))))errors.push("Every payoff cell must contain a valid number.");if(data.states.some(s=>!Number.isFinite(s.p)||s.p<0))errors.push("Probabilities must be non-negative numbers.");const total=data.states.reduce((s,x)=>s+x.p,0);if(Math.abs(total-100)>1e-7)errors.push(`State probabilities currently total ${fmt(total)}%; they must total exactly 100%.`);return errors}
+function stats(){const n=data.alts.length,m=data.states.length;const mins=data.pay.map(r=>Math.min(...r)),maxs=data.pay.map(r=>Math.max(...r));const bestByState=Array.from({length:m},(_,j)=>Math.max(...data.pay.map(r=>r[j])));const regrets=data.pay.map(r=>r.map((v,j)=>bestByState[j]-v));const maxRegrets=regrets.map(r=>Math.max(...r));const emv=data.pay.map(r=>r.reduce((s,v,j)=>s+v*data.states[j].p/100,0));return{mins,maxs,bestByState,regrets,maxRegrets,emv}}
+function winners(values,mode,indices){const arr=indices.map(i=>values[i]);const best=mode==="min"?Math.min(...arr):Math.max(...arr);return{best,ids:indices.filter(i=>tied(values[i],best))}}
+function criterion(c,s,ids){if(c==="maximin")return winners(s.mins,"max",ids);if(c==="maximax")return winners(s.maxs,"max",ids);if(c==="minimaxRegret")return winners(s.maxRegrets,"min",ids);return winners(s.emv,"max",ids)}
+function renderTable(){let h='<thead><tr><th>Alternative</th>'+data.states.map((s,j)=>`<th><input class="name-input state-name" data-j="${j}" value="${esc(s.name)}"><div class="muted" style="font-size:11px;margin-top:4px">Probability <input class="prob" data-j="${j}" type="number" min="0" step="any" value="${s.p}" style="width:74px"> %</div><button class="small danger del-state" data-j="${j}">Remove</button></th>`).join("")+'<th>Action</th></tr></thead><tbody>';
+data.alts.forEach((a,i)=>{h+=`<tr><td><input class="name-input alt-name" data-i="${i}" value="${esc(a)}"></td>`+data.states.map((s,j)=>`<td><input class="pay" data-i="${i}" data-j="${j}" type="number" step="any" value="${data.pay[i][j]}"></td>`).join("")+`<td><button class="small danger del-alt" data-i="${i}">Remove</button></td></tr>`});h+='</tbody>';if(!transposed)$("payoffTable").innerHTML=h;else renderTransposedTable(h)}
+function renderTransposedTable(normal){let h='<thead><tr><th>State / alternative</th>'+data.alts.map((a,i)=>`<th>${esc(a)}</th>`).join("")+'</tr></thead><tbody>';data.states.forEach((s,j)=>{h+=`<tr><td>${esc(s.name)} <span class="muted">(${fmt(s.p)}%)</span></td>`+data.alts.map((a,i)=>`<td>${fmt(data.pay[i][j])}</td>`).join("")+'</tr>'});$("payoffTable").innerHTML=h}
+function renderSummary(s){$("summary").innerHTML=`<div class="grid">${data.alts.map((a,i)=>`<div class="metric"><div class="k">${esc(a)}</div><div class="v">${fmt(s.emv[i])}</div><div class="who">EMV · ${esc(data.unit)}</div><div class="note">Best: ${fmt(s.maxs[i])} · Worst: ${fmt(s.mins[i])}</div></div>`).join("")}</div><p class="note">EMV = Σ(payoff × probability). Regret in each state = best payoff in that state − the alternative's payoff. The regret benchmark is fixed using the complete original set.</p>`}
+function renderCriteria(s){const defs=[["maximax","Maximax","Choose the alternative with the highest possible payoff.","max"],["maximin","Maximin","Choose the alternative with the highest worst-case payoff.","max"],["minimaxRegret","Minimax Regret","Choose the alternative with the smallest maximum regret.","min"],["emv","EMV / Bayes","Choose the alternative with the highest probability-weighted payoff.","max"]];$("criteria").innerHTML=defs.map(([c,name,desc,mode])=>{let vals=c==="maximax"?s.maxs:c==="maximin"?s.mins:c==="minimaxRegret"?s.maxRegrets:s.emv;let w=valid().length?{best:NaN,ids:[]}:winners(vals,mode,data.alts.map((_,i)=>i));return `<div class="result ${w.ids.length?'winner':''}"><div class="muted" style="font-size:12px;font-weight:750">${name.toUpperCase()}</div><p class="sub">${desc}</p><div class="big">${Number.isFinite(w.best)?fmt(w.best)+' '+esc(data.unit):'—'}</div><strong>${w.ids.length?w.ids.map(i=>esc(data.alts[i])).join(", "):"No recommendation yet"}</strong></div>`}).join("")}
+function renderRegret(s){$("regretArea").innerHTML=`<div class="inline-actions"><button id="toggleRegret">${showRegret?"Hide":"Show"} regret table</button></div>${showRegret?`<div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Alternative</th>${data.states.map(s=>`<th>${esc(s.name)}</th>`).join("")}<th>Maximum regret</th></tr></thead><tbody>${data.alts.map((a,i)=>`<tr><td>${esc(a)}</td>${s.regrets[i].map(v=>`<td>${fmt(v)}</td>`).join("")}<td><b>${fmt(s.maxRegrets[i])}</b></td></tr>`).join("")}</tbody></table></div>`:""}`;$("toggleRegret").onclick=()=>{showRegret=!showRegret;renderRegret(s)}}
+function renderStages(s){const errs=valid();let survivors=data.alts.map((_,i)=>i),snapshots=[{label:"Original alternatives",keep:[...survivors],out:[]}];let stageHtml="";stages.forEach((st,k)=>{let mode=st.criterion==="minimaxRegret"?"min": "max";let vals=st.criterion==="maximin"?s.mins:st.criterion==="maximax"?s.maxs:st.criterion==="minimaxRegret"?s.maxRegrets:s.emv;let result=errs.length?{best:NaN,ids:[]} : criterion(st.criterion,s,survivors);let before=[...survivors];survivors=result.ids;snapshots.push({label:st.label||`Stage ${k+1}`,keep:[...survivors],out:before.filter(i=>!survivors.includes(i))});stageHtml+=`<div class="stage"><div class="stage-top"><label>${esc(st.label||`Stage ${k+1}`)}</label><div style="display:flex;gap:7px;flex-wrap:wrap"><select class="stage-criterion" data-k="${k}"><option value="maximin" ${st.criterion==="maximin"?"selected":""}>Maximin</option><option value="maximax" ${st.criterion==="maximax"?"selected":""}>Maximax</option><option value="minimaxRegret" ${st.criterion==="minimaxRegret"?"selected":""}>Minimax regret</option><option value="emv" ${st.criterion==="emv"?"selected":""}>EMV / Bayes</option></select><button class="small danger del-stage" data-k="${k}">Remove stage</button></div></div><div class="stage-stats">${before.map(i=>`<span class="tag ${survivors.includes(i)?"keep":"out"}">${survivors.includes(i)?"✓ Kept":"✕ Eliminated"} · ${esc(data.alts[i])}</span>`).join("")}</div><p class="note">${errs.length?"Resolve input errors to calculate this stage.":`Cutoff: ${fmt(result.best)} ${esc(data.unit)} · ${survivors.length} survivor(s) of ${before.length}.`}</p></div>`});$("stages").innerHTML=stageHtml||'<p class="sub">No filtering stages. Add a stage to begin.</p>';renderFlow(snapshots,errs.length);document.querySelectorAll(".stage-criterion").forEach(el=>el.onchange=()=>{stages[+el.dataset.k].criterion=el.value;render()});document.querySelectorAll(".del-stage").forEach(el=>el.onclick=()=>{stages.splice(+el.dataset.k,1);render()})}
+function renderFlow(snaps,invalid){$("flow").innerHTML=snaps.map((snap,i)=>`${i?'<div class="flow-arrow">→</div>':""}<div class="flow-col"><h4>${esc(snap.label)}</h4>${snap.keep.map(id=>`<div class="flow-node">${esc(data.alts[id])}</div>`).join("")}${snap.out.map(id=>`<div class="flow-node eliminated">${esc(data.alts[id])}</div>`).join("")}${invalid?'<p class="note">Waiting for valid inputs</p>':""}${!snap.keep.length?'<p class="note">No alternatives remain</p>':""}</div>`).join("")}
+function render(){renderTable();const errors=valid();$("inputNotice").innerHTML=errors.length?`<div class="warning">${errors.map(esc).join("<br>")}</div>`:'<div class="good">Inputs valid. All criteria and filtering stages are up to date.</div>';const s=stats();renderSummary(s);renderCriteria(s);renderRegret(s);renderStages(s);$("unit").value=data.unit}
+function esc(x){return String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+$("payoffTable").addEventListener("change",e=>{let t=e.target;if(t.classList.contains("pay"))data.pay[+t.dataset.i][+t.dataset.j]=t.value.trim()===""?NaN:Number(t.value);if(t.classList.contains("alt-name"))data.alts[+t.dataset.i]=t.value.trim()||`Alternative ${+t.dataset.i+1}`;if(t.classList.contains("state-name"))data.states[+t.dataset.j].name=t.value.trim()||`State ${+t.dataset.j+1}`;if(t.classList.contains("prob"))data.states[+t.dataset.j].p=t.value.trim()===""?NaN:Number(t.value);if(t.classList.contains("del-alt")){let i=+t.dataset.i;if(data.alts.length===1)return alert("At least one alternative is required.");data.alts.splice(i,1);data.pay.splice(i,1)}if(t.classList.contains("del-state")){let j=+t.dataset.j;if(data.states.length===1)return alert("At least one state is required.");data.states.splice(j,1);data.pay.forEach(r=>r.splice(j,1));}render()});
+$("payoffTable").addEventListener("click",e=>{let t=e.target;if(t.classList.contains("del-alt")){let i=+t.dataset.i;if(data.alts.length===1)return alert("At least one alternative is required.");data.alts.splice(i,1);data.pay.splice(i,1);render()}if(t.classList.contains("del-state")){let j=+t.dataset.j;if(data.states.length===1)return alert("At least one state is required.");data.states.splice(j,1);data.pay.forEach(r=>r.splice(j,1));render()}});
+$("addAlt").onclick=()=>{data.alts.push(`Alternative ${data.alts.length+1}`);data.pay.push(data.states.map(()=>0));render()};
+$("addState").onclick=()=>{data.states.push({name:`State ${data.states.length+1}`,p:0});data.pay.forEach(r=>r.push(0));render()};
+$("unit").onchange=e=>{data.unit=e.target.value;render()};
+$("transpose").onclick=()=>{transposed=!transposed;render()};
+$("example").onchange=e=>load(e.target.value);$("reset").onclick=()=>load($("example").value);
+$("addStage").onclick=()=>{stages.push({criterion:"maximin",label:`Stage ${stages.length+1}`});render()};
+$("resetStages").onclick=()=>{stages=[{criterion:"maximin",label:"Stage 1 · Maximin"},{criterion:"emv",label:"Stage 2 · EMV / Bayes"},{criterion:"minimaxRegret",label:"Stage 3 · Minimax regret"}];render()};
+$("print").onclick=()=>window.print();
+$("aiUrl").oninput=e=>{let v=e.target.value.trim();let a=$("aiLink");try{let u=new URL(v);if(u.protocol==="https:"&&/chatgpt\.com$/.test(u.hostname)){a.href=u.href;a.textContent="Open AI development conversation ↗";$("aiStatus").textContent="Conversation link added.";return}}catch{}a.href="https://chatgpt.com/";a.textContent="Open AI development conversation ↗";$("aiStatus").textContent="Paste a valid HTTPS ChatGPT share link to activate the conversation hyperlink."};
+load("logistics");
+</script>
+</body></html>
